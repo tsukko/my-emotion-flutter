@@ -1,12 +1,21 @@
 import 'dart:convert';
 
+import 'package:dart_twitter_api/twitter_api.dart';
 import 'package:http/http.dart';
-import 'package:myemotion/models/my_tweet.dart';
-import 'package:twitter_api/twitter_api.dart';
 
+import '../models/my_tweet.dart';
 import 'environment.dart';
 
 class MyTwitterApi {
+  final twitterApi = TwitterApi(
+    client: TwitterClient(
+      consumerKey: consumerKey,
+      consumerSecret: consumerSecret,
+      token: token,
+      secret: tokenSecret,
+    ),
+  );
+
   Future<List<MyTweet>> getTweet(String userName) async {
     var res = await _getTweet(userName);
     if (res == null) {
@@ -25,28 +34,22 @@ class MyTwitterApi {
   }
 
   Future<Response> _getTweet(String userName) async {
-    final _twitterOauth = new twitterApi(
-      consumerKey: consumerKey,
-      consumerSecret: consumerSecret,
-      token: token,
-      tokenSecret: tokenSecret,
-    );
-
     if (userName.isEmpty) {
       userName = "default userName";
     }
 
-    Future twitterRequest = _twitterOauth.getTwitterRequest(
-      "GET",
-      "statuses/user_timeline.json",
-      options: {
-//        "user_id": "",
-        "screen_name": userName,
-        "count": "20",
-        "include_rts": "true",
-        "tweet_mode": "extended", // Used to prevent truncating tweets
-      },
-    );
+    Future twitterRequest = twitterApi.timelineService.userTimeline();
+//     .getTwitterRequest(
+//       "GET",
+//       "statuses/user_timeline.json",
+//       options: {
+// //        "user_id": "",
+//         "screen_name": userName,
+//         "count": "20",
+//         "include_rts": "true",
+//         "tweet_mode": "extended", // Used to prevent truncating tweets
+//       },
+//     );
 
     return await twitterRequest;
   }

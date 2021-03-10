@@ -11,7 +11,7 @@ class TwitterLoginView extends StatefulWidget {
 }
 
 class _TwitterLoginViewState extends State<TwitterLoginView> {
-  static final TwitterLogin twitterLogin = new TwitterLogin(
+  static final TwitterLogin twitterLogin = TwitterLogin(
     consumerKey: consumerKey,
     consumerSecret: consumerSecret,
   );

@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:myemotion/views/tweet_emotion_view.dart';
-import 'package:myemotion/views/twitter_login_view.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:splashscreen/splashscreen.dart';
 
 import 'util/view_const.dart';
 import 'views/top.dart';
+import 'views/tweet_emotion_view.dart';
+import 'views/twitter_login_view.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  MobileAds.instance.initialize();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

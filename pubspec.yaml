@@ -14,32 +14,34 @@ description: A new Flutter application.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.2
 
-  splashscreen: ^1.2.0
+  splashscreen: ^1.3.5
+
   # logic系
-  http: ^0.12.0+4
+  http: ^0.13.0
 
-  shared_preferences: ^0.5.6+3
+  shared_preferences: ^2.0.3
   # Date
-  intl: ^0.16.1
+  intl: ^0.17.0
 
   # firebase_admob: ^0.9.1+3
-  flutter_native_admob: ^1.0.1
+#  flutter_native_admob: ^2.1.0+3
+  google_mobile_ads: ^0.11.0+2
 
   # ログイン認証用
   flutter_twitter: ^1.1.3
   # Tweet取得用
-  twitter_api: ^0.1.2
+  dart_twitter_api: ^0.5.1
   # google api
-  googleapis: ^0.54.0
-  googleapis_auth: ^0.2.11+1
+  googleapis: ^2.0.0
+  googleapis_auth: ^1.1.0
 
 #  flutter_launcher_icons:  ^0.7.4
 

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_native_admob/flutter_native_admob.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 import '../util/environment.dart';
 import '../util/shared_preferences_util.dart';
@@ -14,6 +14,13 @@ class _TopState extends State<Top> {
   String nowStr;
   String loadStr;
 
+  final BannerAd myBanner = BannerAd(
+    adUnitId: adUnitId(),
+    size: AdSize.banner,
+    request: AdRequest(),
+    listener: AdListener(),
+  );
+
   Future<void> _readData() async {
     loadStr = await SharedPreferencesUtil().lastDate();
     nowStr = await SharedPreferencesUtil().updateDate();
@@ -24,6 +31,7 @@ class _TopState extends State<Top> {
   void initState() {
     super.initState();
     _readData();
+    myBanner.load();
   }
 
   @override
@@ -79,9 +87,16 @@ class _TopState extends State<Top> {
   }
 
   Widget _footer() {
+    final AdWidget adWidget = AdWidget(ad: myBanner);
+    final Container adContainer = Container(
+      alignment: Alignment.center,
+      child: adWidget,
+      width: myBanner.size.width.toDouble(),
+      height: myBanner.size.height.toDouble(),
+    );
     return Align(
       alignment: Alignment.bottomCenter,
-      child: _adMobBanner(),
+      child: adContainer,
     );
   }
 
@@ -208,56 +223,56 @@ class _TopState extends State<Top> {
     );
   }
 
-  Widget _adMobBanner() {
-    return NativeAdmobBannerView(
-      adUnitID: adUnitId(),
-
-      // Styling native view with options
-      options: const BannerOptions(
-        backgroundColor: Colors.white,
-        indicatorColor: Colors.black,
-        ratingColor: Colors.yellow,
-        adLabelOptions: const TextOptions(
-          fontSize: 12,
-          color: Colors.white,
-          backgroundColor: Color(0xFFFFCC66),
-        ),
-        headlineTextOptions: const TextOptions(
-          fontSize: 16,
-          color: Colors.black,
-        ),
-        advertiserTextOptions: const TextOptions(
-          fontSize: 14,
-          color: Colors.black,
-        ),
-        bodyTextOptions: const TextOptions(
-          fontSize: 12,
-          color: Colors.grey,
-        ),
-        storeTextOptions: const TextOptions(
-          fontSize: 12,
-          color: Colors.black,
-        ),
-        priceTextOptions: const TextOptions(
-          fontSize: 12,
-          color: Colors.black,
-        ),
-        callToActionOptions: const TextOptions(
-          fontSize: 15,
-          color: Colors.white,
-          backgroundColor: Color(0xFF4CBE99),
-        ),
-      ),
-
-      // Whether to show media or not
-      showMedia: false,
-
-      // Content paddings
-      contentPadding: EdgeInsets.all(10),
-
-      onCreate: (controller) {
-        // controller.setOptions(BannerOptions()); // change view styling options
-      },
-    );
-  }
+  // Widget BannerAd() {
+  // return NativeAdmobBannerView(
+  //   adUnitID: adUnitId(),
+  //
+  //   // Styling native view with options
+  //   options: const BannerOptions(
+  //     backgroundColor: Colors.white,
+  //     indicatorColor: Colors.black,
+  //     ratingColor: Colors.yellow,
+  //     adLabelOptions: const TextOptions(
+  //       fontSize: 12,
+  //       color: Colors.white,
+  //       backgroundColor: Color(0xFFFFCC66),
+  //     ),
+  //     headlineTextOptions: const TextOptions(
+  //       fontSize: 16,
+  //       color: Colors.black,
+  //     ),
+  //     advertiserTextOptions: const TextOptions(
+  //       fontSize: 14,
+  //       color: Colors.black,
+  //     ),
+  //     bodyTextOptions: const TextOptions(
+  //       fontSize: 12,
+  //       color: Colors.grey,
+  //     ),
+  //     storeTextOptions: const TextOptions(
+  //       fontSize: 12,
+  //       color: Colors.black,
+  //     ),
+  //     priceTextOptions: const TextOptions(
+  //       fontSize: 12,
+  //       color: Colors.black,
+  //     ),
+  //     callToActionOptions: const TextOptions(
+  //       fontSize: 15,
+  //       color: Colors.white,
+  //       backgroundColor: Color(0xFF4CBE99),
+  //     ),
+  //   ),
+  //
+  //   // Whether to show media or not
+  //   showMedia: false,
+  //
+  //   // Content paddings
+  //   contentPadding: EdgeInsets.all(10),
+  //
+  //   onCreate: (controller) {
+  //     // controller.setOptions(BannerOptions()); // change view styling options
+  //   },
+  // );
+  // }
 }

@@ -20,7 +20,7 @@ final String tokenSecret = tokenSecret_p;
 
 // Google Cloud Natural Language in my Flutter
 final credentials = credentials_p;
-var scopes = [LanguageApi.CloudLanguageScope];
+var scopes = [CloudNaturalLanguageApi.cloudLanguageScope];
 var emojiArray = [
   "🤪",
   "🤮",

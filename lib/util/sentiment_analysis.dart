@@ -8,7 +8,7 @@ class SentimentAnalysis {
   Future<String> sentimentAnalysis(String message) async {
     AutoRefreshingAuthClient client =
         await clientViaServiceAccount(credentials, scopes);
-    LanguageApi lang = LanguageApi(client);
+    CloudNaturalLanguageApi lang = CloudNaturalLanguageApi(client);
     Document doc = Document();
     doc.content = message;
     doc.type = 'PLAIN_TEXT';
